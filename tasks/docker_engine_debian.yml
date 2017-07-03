@@ -1,0 +1,16 @@
+---
+- name: Import Docker APT public key.
+  apt_key:
+    url: "{{ docker_pubkey_url }}"
+    state: present
+
+- name: Install apt-transport-https if necessary.
+  apt:
+    name: apt-transport-https
+    state: present
+
+- name: Add the APT Docker repository.
+  apt_repository:
+    repo: "{{ docker_apt_repo }}"
+    state: present
+    filename: 'docker'
