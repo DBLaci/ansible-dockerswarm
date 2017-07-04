@@ -12,7 +12,7 @@
     state: present
   with_items: "{{ docker_dependencies }}"
 
-- name: Install the Docker Engine.
+- name: Remove old docker versions.
   package:
     name: "{{ item }}"
     state: absent
