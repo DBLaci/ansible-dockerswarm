@@ -1,6 +1,7 @@
 ---
 
 # Docker repository branch
+
 docker_repo: stable
 # docker_repo: testing
 # docker_repo: experimental
@@ -23,6 +24,7 @@ docker_admin_users:
   - "{{ ansible_user | default(ansible_user_id) }}" # if ansible_user is not defined, we default to the ansible ansible_user_id fact
 
 # Switches disabling the docker-engine, docker group and swarm-mode setup.
+remove_old_versions: False
 skip_engine: False # if true, skip the docker engine installation
 skip_group: False  # if true, does not add the docker_admin_users to the docker_group_name
 skip_swarm: False  # if true, skip the swarm setup

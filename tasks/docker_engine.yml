@@ -14,6 +14,16 @@
 
 - name: Install the Docker Engine.
   package:
+    name: "{{ item }}"
+    state: absent
+  with_items:
+    - docker
+    - docker-engine
+    - docker.io
+  when: remove_old_versions
+
+- name: Install the Docker Engine.
+  package:
     name: docker-ce
     state: present
 
