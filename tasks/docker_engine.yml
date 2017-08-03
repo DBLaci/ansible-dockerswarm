@@ -48,7 +48,7 @@
     state: present
   when: ansible_distribution != 'Amazon'
 
-- name: Install the Docker Engine on Amazon
+- name: Install the Docker Engine (Amazon Linux AMI)
   package:
     name: docker
     state: present
