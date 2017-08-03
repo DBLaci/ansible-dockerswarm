@@ -27,6 +27,7 @@
     gpgkey: "{{ docker_yum_gpgkey }}"
     gpgcheck: yes
   when: ansible_os_family == 'RedHat'
+    and ansible_distribution != 'Amazon'
 
 - name: Add the APT Docker repository.
   apt_repository:
@@ -45,6 +46,13 @@
   package:
     name: docker-engine
     state: present
+  when: ansible_distribution != 'Amazon'
+
+- name: Install the Docker Engine on Amazon
+  package:
+    name: docker
+    state: present
+  when: ansible_distribution == 'Amazon'
 
 - name: Enable the Docker daemon as a service and start it.
   service:
