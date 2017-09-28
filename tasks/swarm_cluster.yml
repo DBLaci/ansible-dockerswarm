@@ -112,11 +112,10 @@
     - skip_ansible_lint
     - swarm_labels
 
-- name: Asign labels to swarm nodes | if any
-  command: docker node update --label-add {{ item }}=true {{ ansible_hostname }}
+- name: Assign labels to swarm nodes | if any
+  command: docker node update --label-add {{ item.key }}={{ item.value }} {{ ansible_hostname }}
   changed_when: False
-  with_items:
-    - "{{ swarm_labels  | default([]) }}"
+  with_dict: "{{ swarm_labels | default({}) }}"
   delegate_to: "{{ groups[swarm_manager_groupname][0] }}"
   delegate_facts: True
   tags:
