@@ -5,6 +5,7 @@
 
 - include: docker_engine_redhat.yml
   when: ansible_os_family == 'RedHat'
+    and ansible_distribution != 'Amazon'
 
 - name: Install Docker dependencies.
   package:
@@ -26,6 +27,13 @@
   package:
     name: docker-ce
     state: present
+  when: ansible_distribution != 'Amazon'
+
+- name: Install the Docker Engine (Amazon Linux)
+  package:
+    name: docker
+    state: present
+  when: ansible_distribution == 'Amazon'
 
 - name: Enable the Docker daemon as a service and start it.
   service:
