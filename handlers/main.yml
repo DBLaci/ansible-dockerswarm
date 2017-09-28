@@ -1,0 +1,7 @@
+---
+
+# not used in the role but can be useful on playbook level
+
+- name: Restart docker
+  service: name=docker state=restarted
+

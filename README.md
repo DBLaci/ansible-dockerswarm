@@ -74,7 +74,7 @@ You can define labels by `swarm_labels` variable, e.g:
     swarm-01 swarm_labels=deploy
 
     [docker_swarm_worker]
-    swarm-02 swarm_labels='["libvirt", "docker", "foo", "bar"]'
+    swarm-02 swarm_labels='{"libvirt": true, "docker": true, "foo": true, "bar": "apple"}'
     swarm-03
     ...
 
@@ -82,7 +82,7 @@ In this case:
 
     $ docker inspect --format '{{json .Spec.Labels}}'  swarm-02 | jq
     {
-       "bar": "true",
+       "bar": "apple",
        "docker": "true",
        "for": "true",
        "libvirt": "true",
@@ -114,7 +114,7 @@ Example Playbook
     swarm-01 swarm_labels=deploy
 
     [docker_swarm_worker]
-    swarm-02 swarm_labels='["libvirt", "docker", "foo", "bar"]'
+    swarm-02 swarm_labels='{"libvirt": true, "docker": true, "foo": true, "bar": "apple"}'
     swarm-03
 
     $ cat playbook.yml
